@@ -1,0 +1,24 @@
+
+# -*- mode: yaml-*-
+# # vi: set ft=yaml sw=2 ts=2 :
+#
+- name: Teamvoy Server
+  hosts: all
+  user: root
+  become: True
+  tasks:
+    - name: "User Teamvoy"
+      user:
+        name: teamvoy
+        password: '$6$/OStJP2DabD3Cla$BRuJmUxV0K/v2dw6GHvg0PdjgEk8V3oFXy.1XECuYqRIQ/Kd3BB.7vAwpwRPbqTQT9dEucQfB2Lasxw7SkDeO1'
+        state: present
+        comment: "User for Ansible_Teamvoy"
+        uid: 1040
+        groups: sudo, admin
+        shell: /bin/bash
+
+    - name: Shell script
+      shell: echo "hello" >> 1.txt
+
+    - name: "Reboot Vagrant"
+      reboot:
